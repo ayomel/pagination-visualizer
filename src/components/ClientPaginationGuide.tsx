@@ -22,9 +22,8 @@ export default function ClientPaginationGuide() {
     <section className="guide" aria-labelledby="guide-heading">
       <h2 id="guide-heading">Client-side pagination for long lists</h2>
       <p className="muted">
-        Same window math as the visualizer above. Here{" "}
-        <code>{LIST_TOTAL.toLocaleString()}</code> items load once via React Query; only the current slice is rendered
-        in the DOM.
+        Same <code>fromPage</code> / <code>Window</code> types as above. This demo fetches{" "}
+        <code>{LIST_TOTAL.toLocaleString()}</code> rows once, then maps <code>pageItems</code>, not the full array.
       </p>
 
       <div className="guide-steps">
@@ -37,9 +36,8 @@ export default function ClientPaginationGuide() {
           <h3>2. Derive offset from page + pageSize</h3>
           <pre className="code guide-code">{SNIPPET_WINDOW}</pre>
           <p className="guide-step-note muted">
-            <code>window</code> turns page controls into numbers you can slice with: where to start (
-            <code>offset</code>), how many rows (<code>returned</code>), and whether prev/next should work (
-            <code>hasNextPage</code>).
+            <code>window</code> is the slice in array indices: start at <code>offset</code>, take{" "}
+            <code>returned</code> rows, use <code>hasNextPage</code> for the next button.
           </p>
         </div>
 
@@ -47,8 +45,8 @@ export default function ClientPaginationGuide() {
           <h3>3. Slice in memory</h3>
           <pre className="code guide-code">{SNIPPET_SLICE}</pre>
           <p className="guide-step-note muted">
-            <code>pageItems</code> is a new array view of the cached list for this page only. Paging updates state and
-            recomputes the slice; React Query does not refetch.
+            <code>pageItems</code> is <code>data.slice(...)</code> for the current page. Change page or pageSize and
+            React recomputes the slice. The query key stays the same, so nothing refetches.
           </p>
           {!isPending && items && (
             <p className="muted slice-live">
@@ -61,8 +59,7 @@ export default function ClientPaginationGuide() {
           <h3>4. Render only pageItems</h3>
           <pre className="code guide-code">{SNIPPET_RENDER}</pre>
           <p className="guide-step-note muted">
-            The list component reads <code>pageItems</code>, not the full 10k <code>data</code> array, so each page
-            mounts only a handful of DOM nodes.
+            Render <code>pageItems</code>. With pageSize 10 you get 10 list nodes, not 10,000.
           </p>
         </div>
       </div>

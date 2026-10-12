@@ -6,7 +6,7 @@ export default function App() {
     <main className="app">
       <header>
         <h1>Pagination visualizer</h1>
-        <p className="muted">High-level pagination concepts, then a TypeScript recipe for long lists.</p>
+        <p className="muted">Offset vs page in the grid above. Below, slice a list you already fetched.</p>
       </header>
 
       <PaginationVisualizer />

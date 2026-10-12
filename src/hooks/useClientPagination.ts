@@ -13,11 +13,11 @@ export function useClientPagination<T>(items: T[] | undefined, options: ClientPa
   // How many rows exist in the fetched list (0 while still loading).
   const total = items?.length ?? 0;
 
-  // window: which slice of the full list the UI is on — offset/limit, page numbers, hasNextPage, etc.
+  // Current slice: offset, returned, page, hasNextPage.
   const window: Window =
     mode === "page" ? fromPage(Math.floor(offset / size) + 1, size, total) : fromOffset(offset, size, total);
 
-  // pageItems: rows to render for this page only; slice from cache, no extra network request.
+  // Rows for this page only (slice from items, no refetch).
   const pageItems = useMemo(
     () => (items ? items.slice(window.offset, window.offset + window.returned) : []),
     [items, window.offset, window.returned],

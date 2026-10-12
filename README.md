@@ -1,12 +1,12 @@
 # Pagination visualizer
 
-Small React app (Vite, TypeScript) for one dataset of 87 items. You pick `limit`/`offset` or `page`/`pageSize` and see whether they describe the same slice.
+React + Vite + TypeScript. One dataset. Sliders for `limit`/`offset` or `page`/`pageSize`. Check whether both names describe the same slice.
 
-Move the sliders. The query string, SQL, and counts update together. When `offset` is not a multiple of `limit`, you get a window that page mode cannot represent. That mismatch is the whole demo.
+The query string, SQL, and counts move together. If `offset` is not a multiple of `limit`, page mode has no integer page for that slice. That gap is what the top section is for.
 
-When things line up: `offset = (page - 1) * pageSize`.
+Aligned case: `offset = (page - 1) * pageSize`.
 
-Scroll down for a **long-list guide**: TypeScript snippets plus a live demo that loads 10,000 items once with React Query and paginates on the client by slicing the cached array.
+Further down: snippets and a live demo. React Query loads 10,000 items once; paging is `array.slice` on the cached result.
 
 ## Long lists (client-side)
 

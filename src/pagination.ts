@@ -2,7 +2,7 @@ export type Mode = "offset" | "page";
 
 export const TOTAL = 87;
 
-/** Describes one page/slice of a list — shared by the visualizer and client-side slicing. */
+/** One slice of a list: offset, limit, page fields, hasNextPage. Shared by the visualizer and client paging. */
 export interface Window {
   /** Index in the full list where this slice starts. */
   offset: number;

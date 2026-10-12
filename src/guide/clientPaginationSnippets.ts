@@ -16,7 +16,7 @@ const [pageSize, setPageSize] = useState(10);
 
 const total = data?.length ?? 0;
 
-// window: describes the current slice of the full list (same idea as limit/offset on the server).
+// window: offset + returned for this page (server limit/offset, but the array lives in memory).
 const window = fromPage(page, pageSize, total);
 // window.offset     — start index in the array (0-based)
 // window.returned   — count of items in this slice (≤ pageSize; smaller on the last page)
@@ -24,13 +24,13 @@ const window = fromPage(page, pageSize, total);
 // window.totalPages — Math.ceil(total / pageSize)
 // window.hasNextPage — true if another slice exists after this one`;
 
-export const SNIPPET_SLICE = `// pageItems: the subset you actually render; everything else stays in memory only.
+export const SNIPPET_SLICE = `// pageItems: what you pass to the list component.
 const pageItems = useMemo(
   () => (data ? data.slice(window.offset, window.offset + window.returned) : []),
   [data, window.offset, window.returned],
 );`;
 
-export const SNIPPET_RENDER = `// Map pageItems, not the full data array — keeps the DOM small for long lists.
+export const SNIPPET_RENDER = `// Map pageItems, not data. pageSize rows in the tree, not the whole cache.
 return (
   <ul>
     {pageItems.map((item) => (
