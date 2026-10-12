@@ -2,14 +2,20 @@ export type Mode = "offset" | "page";
 
 export const TOTAL = 87;
 
+/** Describes one page/slice of a list — shared by the visualizer and client-side slicing. */
 export interface Window {
+  /** Index in the full list where this slice starts. */
   offset: number;
+  /** Requested max items (limit or pageSize). */
   limit: number;
+  /** 1-based page number when offset is aligned to page boundaries. */
   page: number;
   pageSize: number;
   totalPages: number;
+  /** Actual item count in this slice (may be less than limit on the last page). */
   returned: number;
   hasNextPage: boolean;
+  /** True when offset is a multiple of limit (page/pageSize can represent this slice exactly). */
   aligned: boolean;
 }
 

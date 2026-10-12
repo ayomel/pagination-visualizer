@@ -6,18 +6,24 @@ Move the sliders. The query string, SQL, and counts update together. When `offse
 
 When things line up: `offset = (page - 1) * pageSize`.
 
+Scroll down for a **long-list guide**: TypeScript snippets plus a live demo that loads 10,000 items once with React Query and paginates on the client by slicing the cached array.
+
+## Long lists (client-side)
+
+- Top section: [`src/components/PaginationVisualizer.tsx`](src/components/PaginationVisualizer.tsx) + [`src/pagination.ts`](src/pagination.ts)
+- Bottom guide: [`src/components/ClientPaginationGuide.tsx`](src/components/ClientPaginationGuide.tsx), [`src/guide/clientPaginationSnippets.ts`](src/guide/clientPaginationSnippets.ts), [`src/hooks/useItemsQuery.ts`](src/hooks/useItemsQuery.ts), [`src/hooks/useClientPagination.ts`](src/hooks/useClientPagination.ts)
+- Mock fetch: [`src/api/items.ts`](src/api/items.ts) (`@tanstack/react-query` is only required for the guide demo)
+
 ## Run it
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 ## Build
 
 ```bash
-npm run build
-npm run preview
+pnpm build
+pnpm preview
 ```
-
-Pagination logic is in `src/pagination.ts`. The UI is the rest.
