@@ -172,7 +172,7 @@ export default function PaginationVisualizer() {
           ? `offset = (page − 1) × pageSize = (${w.page} − 1) × ${size} = ${w.offset}`
           : w.aligned
             ? `page = floor(offset / limit) + 1 = floor(${w.offset} / ${size}) + 1 = ${w.page}`
-            : `Offset ${w.offset} with limit ${size} cuts across a page boundary. You can request it with limit/offset. Page/pageSize has no integer page for this slice.`}
+            : `Offset ${w.offset} with limit ${size} starts mid-page. limit/offset can request it. page/pageSize cannot.`}
       </p>
     </section>
   );

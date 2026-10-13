@@ -6,7 +6,7 @@ export default function App() {
     <main className="app">
       <header>
         <h1>Pagination visualizer</h1>
-        <p className="muted">Offset vs page in the grid above. Below, slice a list you already fetched.</p>
+        <p className="muted">First the N-item grid. Then paging through a list that is already in memory.</p>
       </header>
 
       <PaginationVisualizer />

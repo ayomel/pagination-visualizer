@@ -5,7 +5,7 @@ export function useItemsQuery() {
     queryKey: ["items", "all"],
     queryFn: fetchAllItems,
     staleTime: Infinity,
-    // page / pageSize are NOT in the key — changing page does not refetch
+    // page and pageSize stay out of the key. Changing page does not refetch.
   });
 }`;
 
@@ -16,13 +16,13 @@ const [pageSize, setPageSize] = useState(10);
 
 const total = data?.length ?? 0;
 
-// window: offset + returned for this page (server limit/offset, but the array lives in memory).
+// Same numbers as server limit/offset; the full array is already in memory.
 const window = fromPage(page, pageSize, total);
-// window.offset     — start index in the array (0-based)
-// window.returned   — count of items in this slice (≤ pageSize; smaller on the last page)
-// window.page       — 1-based page number for controls / labels
-// window.totalPages — Math.ceil(total / pageSize)
-// window.hasNextPage — true if another slice exists after this one`;
+// window.offset: start index (0-based)
+// window.returned: rows in this slice (<= pageSize; last page may be shorter)
+// window.page: 1-based, for labels and controls
+// window.totalPages: Math.ceil(total / pageSize)
+// window.hasNextPage: another slice exists after this one`;
 
 export const SNIPPET_SLICE = `// pageItems: what you pass to the list component.
 const pageItems = useMemo(
@@ -30,7 +30,7 @@ const pageItems = useMemo(
   [data, window.offset, window.returned],
 );`;
 
-export const SNIPPET_RENDER = `// Map pageItems, not data. pageSize rows in the tree, not the whole cache.
+export const SNIPPET_RENDER = `// Map pageItems, not data. One page of <li>s, not the full cache.
 return (
   <ul>
     {pageItems.map((item) => (

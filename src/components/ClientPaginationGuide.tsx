@@ -20,10 +20,10 @@ export default function ClientPaginationGuide() {
 
   return (
     <section className="guide" aria-labelledby="guide-heading">
-      <h2 id="guide-heading">Client-side pagination for long lists</h2>
+      <h2 id="guide-heading">Page a cached list</h2>
       <p className="muted">
-        Same <code>fromPage</code> / <code>Window</code> types as above. This demo fetches{" "}
-        <code>{LIST_TOTAL.toLocaleString()}</code> rows once, then maps <code>pageItems</code>, not the full array.
+        Reuses <code>fromPage</code> and <code>Window</code> from the grid. One fetch for{" "}
+        <code>{LIST_TOTAL.toLocaleString()}</code> rows; the list renders <code>pageItems</code> only.
       </p>
 
       <div className="guide-steps">
@@ -67,7 +67,7 @@ export default function ClientPaginationGuide() {
       <div className="guide-demo">
         <h3>Live demo</h3>
 
-        {isPending && <p className="status muted">Loading {LIST_TOTAL.toLocaleString()} items…</p>}
+        {isPending && <p className="status muted">Loading {LIST_TOTAL.toLocaleString()} items...</p>}
 
         {isError && (
           <p className="status error">
